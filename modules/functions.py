@@ -1,5 +1,9 @@
 # Módulo que contiene las funciones relacionadas con el procesamiento de datos estadísticos de estudiantes
 import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
 import csv
 import copy
 

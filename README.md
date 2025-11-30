@@ -47,3 +47,76 @@ la evaluación mediante MAE.
 Licencia y créditos
 
 Proyecto educativo — adaptar y reutilizar según convenga para prácticas académicas.
+
+Instalación y entorno virtual (Windows - cmd.exe)
+
+1. Crear un entorno virtual en la carpeta del proyecto:
+
+```cmd
+python -m venv .venv
+```
+
+2. Activar el entorno virtual (en `cmd.exe`):
+
+```cmd
+.\.venv\Scripts\activate
+```
+
+3. (Opcional) Actualizar `pip` dentro del venv:
+
+```cmd
+python -m pip install --upgrade pip
+```
+
+4. Crear un `requirements.txt` mínimo (si no existe):
+
+```cmd
+echo numpy > requirements.txt
+```
+
+5. Instalar dependencias desde `requirements.txt` (con venv activado):
+
+```cmd
+pip install -r requirements.txt
+```
+
+6. Verificar que `numpy` está instalado y se puede importar:
+
+```cmd
+python -c "import numpy as np; print('numpy OK, versión', np.__version__)"
+```
+
+7. Ejecutar el script principal dentro del venv:
+
+```cmd
+python main.py
+```
+
+8. Salir del venv cuando termines:
+
+```cmd
+deactivate
+```
+
+Consejos de resolución de problemas
+- Si al ejecutar `test.py` sigue apareciendo `ModuleNotFoundError`, añade temporalmente al inicio del script:
+
+```python
+import sys
+print('Python que ejecuta el script:', sys.executable)
+```
+
+- Asegúrate de que el `sys.executable` apunte a `...\.venv\Scripts\python.exe`.
+- Si tienes varias versiones de Python instaladas en Windows, usa el launcher `py`:
+
+```cmd
+py -3 -m venv .venv
+.\.venv\Scripts\activate
+py -3 -m pip install -r requirements.txt
+```
+
+- Para fijar versiones exactas tras instalar, genera `requirements.txt` con:
+
+```cmd
+pip freeze > requirements.txt
+```
