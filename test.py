@@ -1,5 +1,5 @@
 import modules.functions as func
-años, Estudiantes = func.cargar_datos_listas()
+años, Estudiantes = func.cargar_datos()
 #print(len(datos))
 #print(años)s
 #print(Estudiantes)

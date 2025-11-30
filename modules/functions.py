@@ -37,7 +37,8 @@ def cargar_datos(path = './database/hist_matriculados.csv'):
     return años, Estudiantes
 
 def linear_regression(x, a, b):
-    return x * a + b
+    x = np.array(x)  # Asegurarse de que x sea un arreglo de NumPy
+    return ((x * a) + b)
 
 def MAE(y, y_pred):
     return np.mean(np.abs(y - y_pred))
