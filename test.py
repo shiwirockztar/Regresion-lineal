@@ -1,3 +1,8 @@
 import modules.functions as func
-datos = func.cargar_datos()
-print(len(datos))
+años, Estudiantes = func.cargar_datos_listas()
+#print(len(datos))
+#print(años)s
+#print(Estudiantes)
+
+m = float((Estudiantes[-1] - Estudiantes[0])/(años[-1] - años[0]))
+Y = float(Estudiantes[0] - m*años[0])
