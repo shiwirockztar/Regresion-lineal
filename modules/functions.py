@@ -36,12 +36,25 @@ def cargar_datos(path = './database/hist_matriculados.csv'):
             Estudiantes.append(int(valores[1]))
     return años, Estudiantes
 
-def linear_regression(x, a, b):
-    x = np.array(x)  # Asegurarse de que x sea un arreglo de NumPy
-    return x * a + b
+def linear_regression(años, m, Y):
+    x = np.array(años)  # Asegurarse de que x sea un arreglo de NumPy
+    return x * m + Y
 
 def MAE(y, y_pred):
     return np.mean(np.abs(y - y_pred))
+
+def crear_vector(numero, rebaja, sube, paso=1):
+    '''
+    Crea un vector con un número repetido desde un límite inferior hasta un límite superior
+
+    numero (int/float): número a repetir
+    rebaja (int): cantidad a restar al número para el límite inferior
+    sube (int): cantidad a sumar al número para el límite superior
+
+    return (list): vector con el número repetido
+    '''
+    vector = np.arange(numero - rebaja, numero + sube + 1, paso)
+    return vector
 
 def plot_data(data, regression_line):
     '''
