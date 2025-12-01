@@ -38,7 +38,35 @@ def cargar_datos(path = './database/hist_matriculados.csv'):
 
 def linear_regression(x, a, b):
     x = np.array(x)  # Asegurarse de que x sea un arreglo de NumPy
-    return ((x * a) + b)
+    return x * a + b
 
 def MAE(y, y_pred):
     return np.mean(np.abs(y - y_pred))
+
+def plot_data(data, regression_line):
+    '''
+    Grafica los datos y la Regresión Lineal
+
+    data (tuple of lists): ([años], [estudiantes])
+    regression_line (list): valores predichos
+    years (list): lista de años correspondiente a regression_line
+    '''
+
+    # Separar los datos
+    años = np.array(data[0])
+    Estudiantes = np.array(data[1])
+
+    # Calcular error MAE
+    error = MAE(Estudiantes, regression_line)
+    print(error)
+
+    # Graficar
+    plt.figure(figsize=(10, 6))
+    plt.plot(años, Estudiantes, 'o', label='Data Points')
+    plt.plot(años, regression_line, 'r', label='Linear Regression')
+    plt.grid(True)
+    plt.legend()
+    plt.title(f'Historical Data and Linear Regression MAE = {error:.2f}')
+    plt.xlabel('Year')
+    plt.ylabel('Students Enrolled')
+    plt.show()
