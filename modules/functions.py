@@ -36,6 +36,12 @@ def cargar_datos(path = './database/hist_matriculados.csv'):
             Estudiantes.append(int(valores[1]))
     return años, Estudiantes
 
+def calcular_pendiente_interseccion(años, Estudiantes):
+    # Esta función calcula la pendiente (m) y la intersección (Y) de la línea de regresión lineal.
+    m = float((Estudiantes[-1] - Estudiantes[0])/(años[-1] - años[0]))
+    Y = float(Estudiantes[0] - m*años[0])
+    return m, Y 
+
 def linear_regression(años, m, Y):
     x = np.array(años)  # Asegurarse de que x sea un arreglo de NumPy
     return x * m + Y
@@ -55,6 +61,31 @@ def crear_vector(numero, rebaja, sube, paso=1):
     '''
     vector = np.arange(numero - rebaja, numero + sube + 1, paso)
     return vector
+
+def funcion_optimizacion(años, Estudiantes, m, Y):
+    '''
+    Realiza una búsqueda de cuadrícula para optimizar m y Y
+
+    años (list): lista de años
+    Estudiantes (list): lista de estudiantes
+    m (float): pendiente inicial
+    Y (float): intersección inicial
+
+    return (tuple): mejor pendiente, mejor intersección, error MAE mínimo
+    '''
+    variacion_m = crear_vector(m, 5, 5, paso=0.001)
+    variacion_Y = crear_vector(Y, 300, 300)
+    variacion_MAE = []
+    for pendiente in variacion_m:   
+        for interseccion in variacion_Y:
+            predicted = linear_regression(años, pendiente, interseccion)
+            error = MAE(np.array(Estudiantes), predicted)
+            variacion_MAE.append((pendiente, interseccion, error))  
+
+    # Encontrar la combinación de m y Y que minimiza el error MAE
+    min_error = min(variacion_MAE, key=lambda x: x[2])
+    return min_error
+
 
 def plot_data(data, regression_line):
     '''
