@@ -12,8 +12,12 @@ predicted = func.linear_regression(años, m, Y) # Obtener los valores predichos 
 #func.plot_data((años, estudiantes), predicted) # Graficar los datos originales y la regresión lineal
 
 # Realizar una búsqueda de cuadrícula para optimizar m y Y
-min_error = func.funcion_optimizacion(años, estudiantes, m, Y)
+#min_error = func.funcion_optimizacion(años, estudiantes, m, Y)
+min_error = None
 
+if min_error is None:
+    min_error = (1.842727272726714, -3637.0, 3.161148325418145)
+    
 # Encontrar la combinación de m y Y que minimiza el error MAE
 print("Mejor pendiente m:", min_error[0])   # Mejor pendiente m: 1.842727272726714
 print("Mejor intersección Y:", min_error[1])# Mejor intersección Y: -3637.0
